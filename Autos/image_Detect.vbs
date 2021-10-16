@@ -1,0 +1,1 @@
+CreateObject("Wscript.Shell").Run "C:\Opu\Autos\Image_detect.bat" , True

@@ -1,0 +1,1 @@
+CreateObject("Wscript.Shell").Run "C:\Opu\Autos\autostart_Logoff.bat", 0 , True

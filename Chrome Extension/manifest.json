@@ -1,0 +1,15 @@
+{
+  "name": "Opu",
+  "description": "Ich mache mir das web, wie es mir gefaellt",
+  "version": "1.0",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [ "./popup.js", "message.js" ]
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "nativeMessaging"
+  ]
+}

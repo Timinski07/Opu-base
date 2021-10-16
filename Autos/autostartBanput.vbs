@@ -1,0 +1,1 @@
+CreateObject("Wscript.Shell").Run "C:\Opu\Autos\autostartBanput.bat", 0 , True

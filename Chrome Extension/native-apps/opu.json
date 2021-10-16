@@ -1,0 +1,9 @@
+{
+    "name": "com.letcode.sp",
+    "description": "Open VSCode",
+    "path": "opu.bat",
+    "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://jnhobnemkhdfagbhgnncmafogedjidkk/"
+  ]
+}
