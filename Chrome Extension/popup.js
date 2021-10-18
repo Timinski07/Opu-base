@@ -7,6 +7,19 @@ chrome.tabs.onActivated.addListener(tab => {
     });
 });
 
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    var tmp = url;
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+        url = tabs[0].url;
+    });
+    if (url == tmp) {
+        chrome.tabs.executeScript(null, { file: "./foreground.js" }, () => console.log("I injected 2"));
+    }
+    if (checkList(url)) {
+        removeTab(tabId)
+    }
+})
+
 function removeTab(id) {
     chrome.tabs.getCurrent(function (tab) {
         console.log("in2");
@@ -21,16 +34,19 @@ function removeTab(id) {
         }
     });
 }
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    var tmp = url;
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
-        url = tabs[0].url;
+
+function checkList(word) {
+    var einArray = ["bing", "ecosia", "yahoo", "duckgo", "ask.com", "baidu", "aol.com", "excite.com", "swisscows.com",
+        "creativecommons", "yandex",
+        "reddit", "instagram", "dailymotion", "joyn.de", "tiktok.com", "vimeo", "veoh.com", "web.archive", "metacafe",
+        "utreon", "crackle", "twitch", "wistia", "dtube",
+        "amazon-video"]
+    word = word.toLowerCase();
+    var included = false
+    einArray.forEach(function (einArrayElement) {
+        if (word.search(einArrayElement) > -1) {
+            included = true;
+        }
     });
-    if (url == tmp) {
-        chrome.tabs.executeScript(null, { file: "./foreground.js" }, () => console.log("I injected 2"));
-    }
-    //if (changeInfo.url.search("chrome://extensions/") > -1 || changeInfo.url.search("chrome-extension") > -1) {
-    //    console.log("in");
-    //    //removeTab(tabId);
-    //}
-})
+    return included;
+}

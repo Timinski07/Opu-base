@@ -12,7 +12,7 @@ function checkList(word) {
         "matlab", " cmd", "batch", "bash", "command prompt", "instal", " vbs", "visual basic", "visual studio", "input", "output",
         "convert", "verification", "enable", "disable", "array", "object", "variable", "modify", "hello world", "operator", "inheritance", "overloading",
         "aktien", "bitcoin", " zins", "portfolio", "msci world", "schulden", "insolvenz", "stock", "Anleger", "comdirect", "splid", "learn", "language",
-        "vocabulary", "software", " app", "computer", "desktop", "chrome", "monitor"];
+        "vocabulary", "software", " app", "computer", "desktop", "chrome", "monitor", "repository"];
 
     var included = false
     einArray.forEach(function (einArrayElement) {
