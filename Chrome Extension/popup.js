@@ -1,24 +1,40 @@
 let url = "";
 var port = null;
+let tabNum = 0;
 
 chrome.tabs.onActivated.addListener(tab => {
     chrome.tabs.get(tab.tabId, current_tab_Info => {
-        chrome.tabs.executeScript(null, { file: "./foreground.js" }, () => console.log("I injected 1"));
+        if (url.search("youtube") > -1) {
+            chrome.tabs.executeScript(null, { file: "./content_scripts/foreground.js" }, () => console.log("I injected youtubescript"));
+        }
+        if (url.search("google") > -1 && url.search("search") > -1) {
+            chrome.tabs.executeScript(null, { file: "./content_scripts/google.js" }, () => console.log("I injected googlescript"));
+        }
     });
 });
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     var tmp = url;
+    tabNum = tabId
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
         url = tabs[0].url;
     });
-    if (url == tmp) {
-        chrome.tabs.executeScript(null, { file: "./foreground.js" }, () => console.log("I injected 2"));
-    }
     if (checkList(url)) {
-        removeTab(tabId)
+            removeTab(tabId)
+        }
+    if (url.search("youtube") > -1) {
+        chrome.tabs.executeScript(null, { file: "./content_scripts/foreground.js" }, () => console.log("I injected youtube script"));
+    }
+    if (url.search("google") > -1 && url.search("search") > -1) {
+        chrome.tabs.executeScript(null, { file: "./content_scripts/google.js" }, () => console.log("I injected googlescript"));
     }
 })
+
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        removeTab(tabNum);
+    }
+);
 
 function removeTab(id) {
     chrome.tabs.getCurrent(function (tab) {
@@ -40,7 +56,7 @@ function checkList(word) {
         "creativecommons", "yandex",
         "reddit", "instagram", "dailymotion", "joyn.de", "tiktok.com", "vimeo", "veoh.com", "web.archive", "metacafe",
         "utreon", "crackle", "twitch", "wistia", "dtube",
-        "amazon-video"]
+        "amazon-video", "kkiste", "bs.to", "bs.co", "bs.io", "kinoz.to", "movie4k"]
     word = word.toLowerCase();
     var included = false
     einArray.forEach(function (einArrayElement) {

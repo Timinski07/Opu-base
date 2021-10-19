@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Chrome Extension"
+    "\\Chrome Extension",
+    "\\Chrome Extension\\content_scripts"
   ],
-  "SelectedNode": "\\Chrome Extension\\popup.js",
+  "SelectedNode": "\\Chrome Extension\\content_scripts\\google.js",
   "PreviewInSolutionExplorer": false
 }
